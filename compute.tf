@@ -101,7 +101,7 @@ resource "oci_core_boot_volume_backup" "test_boot_volume_backup" {
   boot_volume_id = each.value
 
   #Optional
-  display_name  = "instance-${each.key}"
+  display_name  = {for instance in data.oci_core_instances.existing_instances.instances:  instance.id => instance}[each.key].display_name
   freeform_tags = { "instance" = each.key }
   type          = "FULL"
 }
@@ -111,7 +111,7 @@ resource "oci_core_boot_volume" "test_boot_volume" {
 
   compartment_id      = var.compartment_ocid
   availability_domain = var.destination_availability_domain
-  display_name        = "volume-${each.key}"
+  display_name        = {for instance in data.oci_core_instances.existing_instances.instances:  instance.id => instance}[each.key].display_name
   source_details {
     id   = oci_core_boot_volume_backup.test_boot_volume_backup[each.key].id
     type = "bootVolumeBackup"
@@ -127,6 +127,7 @@ resource "oci_core_volume_backup" "test_volume_backup" {
   attachment.id => [attachment.instance_id, attachment.volume_id] }
 
   volume_id     = each.value[1]
+  display_name  = {for volume in data.oci_core_volumes.existing_block_volumes.volumes:  volume.id => volume}[each.value[1]].display_name
   freeform_tags = { "instance" = each.value[0] }
   type          = "FULL"
 }
@@ -136,7 +137,7 @@ resource "oci_core_volume" "test_volume" {
 
     compartment_id = var.compartment_ocid
     availability_domain = var.destination_availability_domain
-
+    display_name = each.value.display_name
     source_details {
         #Required
         id = each.value.id
