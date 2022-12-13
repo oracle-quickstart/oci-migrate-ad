@@ -25,7 +25,7 @@ cd oci-migrate-ad-main/
 names of the ADs in your region.
 
 - Edit `env.sh` setting the following variables:
-  - `TF_VAR_compartment_ocid` the compartment containing your instances.
+  - `TF_VAR_compartment_ocid` the compartment containing your instances, this can be the root compartment.
   - `TF_VAR_availability_domain` the name of the AD the instances are in.
   - `TF_VAR_destination_availability_domain` the name of the AD to create new resources in.
 
