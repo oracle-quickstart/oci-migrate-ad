@@ -1,5 +1,5 @@
 
-echo "Creating new instances..."
+echo -e "Creating new instances...\n\n"
 
 cd instances
 terraform init

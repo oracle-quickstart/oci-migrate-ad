@@ -7,7 +7,7 @@ instance_names=$(echo $instances | jq -r '.[] | "\(.display_name) \(.id)"')
 
 echo "Found instances:"
 echo "$instance_names"
-echo "\n"
+echo -e "\n\n"
 
 for i in $instance_ids
 do
