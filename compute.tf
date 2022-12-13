@@ -21,16 +21,12 @@ variable "region" {
 }
 
 variable "availability_domain" {
-  default = "IYfK:US-ASHBURN-AD-1"
 }
 
 variable "destination_availability_domain" {
-  default = "IYfK:US-ASHBURN-AD-2"
 }
 
-
 variable "compartment_ocid" {
-
 }
 
 

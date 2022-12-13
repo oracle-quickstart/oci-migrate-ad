@@ -21,13 +21,10 @@ variable "region" {
 }
 
 variable "availability_domain" {
-  default = "IYfK:US-ASHBURN-AD-1"
 }
 
 variable "destination_availability_domain" {
-  default = "IYfK:US-ASHBURN-AD-2"
 }
-
 
 variable "compartment_ocid" {
 }
@@ -72,8 +69,8 @@ resource "oci_core_instance" "new_instances" {
     display_name           = local.old_vnics[each.key].display_name
     assign_public_ip       = (local.old_vnics[each.key].public_ip_address == "" ? false : true)
     nsg_ids                = local.old_vnics[each.key].nsg_ids
-    #private_ip             = local.old_vnics[each.key].private_ip_address
-    #hostname_label         = local.old_vnics[each.key].hostname_label
+    private_ip             = local.old_vnics[each.key].private_ip_address
+    hostname_label         = local.old_vnics[each.key].hostname_label
     skip_source_dest_check = false
   }
 
