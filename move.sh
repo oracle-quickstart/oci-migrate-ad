@@ -1,7 +1,7 @@
 
 echo "Creating new instances..."
 
-cd intances
+cd instances
 terraform init
 terraform plan
 terraform apply
